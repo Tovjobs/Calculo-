@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teoría: Integración por Partes</title>
+<style>
+  /* ====== CSS: Maquetado y Animaciones ====== */
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1e1e1e;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .container {
+    background: #2d2d2d;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    text-align: center;
+    max-width: 800px;
+  }
+
+  h2 {
+    color: #f1c40f;
+    margin-bottom: 5px;
+  }
+
+  /* Estilos para la fórmula */
+  .formula {
+    font-size: 3.5rem;
+    font-family: 'Times New Roman', Times, serif;
+    margin: 40px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .term {
+    padding: 5px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  /* Colores que separan conceptualmente las operaciones */
+  .u-part { color: #3498db; } /* Azul para lo que se deriva */
+  .v-part { color: #e74c3c; } /* Rojo para lo que se integra */
+
+  /* Animación en Bucle (Looping) para resaltar relaciones */
+  @keyframes pulseLoop {
+    0% { transform: translateY(0) scale(1); text-shadow: 0 0 0px currentColor; }
+    50% { transform: translateY(-5px) scale(1.1); text-shadow: 0 0 20px currentColor; }
+    100% { transform: translateY(0) scale(1); text-shadow: 0 0 0px currentColor; }
+  }
+  
+  .active-loop {
+    animation: pulseLoop 1.5s infinite ease-in-out;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px dashed currentColor;
+  }
+
+  /* Caja de explicación dinámica */
+  .explanation {
+    min-height: 90px;
+    font-size: 1.2rem;
+    color: #bfbfbf;
+    margin-top: 20px;
+    padding: 15px;
+    border-left: 4px solid #f1c40f;
+    background: #252525;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .arrow {
+    display: inline-block;
+    font-size: 1.5rem;
+    vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h2>El Arte de la Integración por Partes</h2>
+  <p>Pasa el ratón sobre los términos de la fórmula para ver cómo se conectan.</p>
+  
+  <!-- Contenedor principal de la fórmula -->
+  <div class="formula">
+    <span>&int;</span>
+    <span class="term u-part" id="u-left">u</span>
+    <span class="term v-part" id="dv-left">dv</span>
+    <span>=</span>
+    <span class="term u-part" id="u-right">u</span>
+    <span class="term v-part" id="v-right">v</span>
+    <span>-</span>
+    <span>&int;</span>
+    <span class="term v-part" id="v-int">v</span>
+    <span class="term u-part" id="du-right">du</span>
+  </div>
+
+  <!-- Texto que cambiará con JavaScript -->
+  <div class="explanation" id="text-box">
+    Interactúa con la fórmula matemática de arriba para descubrir el flujo de trabajo.
+  </div>
+</div>
+
+<script>
+  // ====== JavaScript: Lógica de Interacción ====== //
+
+  // 1. Capturamos los elementos del DOM
+  const uLeft = document.getElementById('u-left');
+  const dvLeft = document.getElementById('dv-left');
+  const uRight = document.getElementById('u-right');
+  const vRight = document.getElementById('v-right');
+  const vInt = document.getElementById('v-int');
+  const duRight = document.getElementById('du-right');
+  const textBox = document.getElementById('text-box');
+
+  // 2. Funciones para activar el bucle de las DERIVADAS (Parte Azul)
+  function highlightU() {
+    uLeft.classList.add('active-loop');
+    uRight.classList.add('active-loop');
+    duRight.classList.add('active-loop');
+    textBox.innerHTML = `
+      <strong style="color:#3498db;">PASO 1: DERIVAR</strong><br>
+      Elegimos una parte de la función inicial como <span style="color:#3498db">u</span>.<br>
+      Esta parte se <span style="color:#3498db">deriva</span> para encontrar <strong>du</strong>.<br>
+      <span class="arrow">↳</span> <em>En tu imagen: u = ln²(x) &rarr; du = (2ln(x)/x) dx</em>
+    `;
+  }
+
+  function removeU() {
+    uLeft.classList.remove('active-loop');
+    uRight.classList.remove('active-loop');
+    duRight.classList.remove('active-loop');
+    resetText();
+  }
+
+  // 3. Funciones para activar el bucle de las INTEGRALES (Parte Roja)
+  function highlightV() {
+    dvLeft.classList.add('active-loop');
+    vRight.classList.add('active-loop');
+    vInt.classList.add('active-loop');
+    textBox.innerHTML = `
+      <strong style="color:#e74c3c;">PASO 2: INTEGRAR</strong><br>
+      El resto de la función se agrupa en <span style="color:#e74c3c">dv</span>.<br>
+      Esta parte obligatoriamente se debe <span style="color:#e74c3c">integrar</span> para encontrar <strong>v</strong>.<br>
+      <span class="arrow">↳</span> <em>En tu imagen: dv = x dx &rarr; v = x²/2</em>
+    `;
+  }
+
+  function removeV() {
+    dvLeft.classList.remove('active-loop');
+    vRight.classList.remove('active-loop');
+    vInt.classList.remove('active-loop');
+    resetText();
+  }
+
+  function resetText() {
+    textBox.innerHTML = "Interactúa con la fórmula matemática de arriba para descubrir el flujo de trabajo.";
+  }
+
+  // 4. Asignación de Eventos (Hover)
+  // Al tocar cualquier término azul, se ilumina el proceso de derivación
+  [uLeft, uRight, duRight].forEach(el => {
+    el.addEventListener('mouseenter', highlightU);
+    el.addEventListener('mouseleave', removeU);
+  });
+
+  // Al tocar cualquier término rojo, se ilumina el proceso de integración
+  [dvLeft, vRight, vInt].forEach(el => {
+    el.addEventListener('mouseenter', highlightV);
+    el.addEventListener('mouseleave', removeV);
+  });
+</script>
+
+</body>
+</html>
