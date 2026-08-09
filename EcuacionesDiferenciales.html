@@ -13,8 +13,20 @@
     
     <!-- KaTeX JS -->
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js" integrity="sha384-cpW21h6RZv/phavutF+AuVYrr+dA8xD9zs6FwLpaCct6O9ctzYFfXb3BvhOU-qE" crossorigin="anonymous"></script>
-    <!-- KaTeX Auto-render -->
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbOxyj0O1rxVqTGbT0dOdh3131" crossorigin="anonymous"></script>
+    
+    <!-- KaTeX Auto-render (Inicializado directamente con onload para evitar errores de carga) -->
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbOxyj0O1rxVqTGbT0dOdh3131" crossorigin="anonymous"
+        onload="renderMathInElement(document.body, {
+            delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '$', right: '$', display: false},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '\\[', right: '\\]', display: true}
+            ],
+            throwOnError : false,
+            output: 'html'
+        });">
+    </script>
 
     <!-- Configuración de Tailwind para animaciones personalizadas -->
     <script>
@@ -312,21 +324,5 @@
         </div>
 
     </div>
-
-    <!-- Script para inicializar KaTeX Auto-Render -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            renderMathInElement(document.body, {
-              delimiters: [
-                  {left: '$$', right: '$$', display: true},
-                  {left: '$', right: '$', display: false},
-                  {left: '\\(', right: '\\)', display: false},
-                  {left: '\\[', right: '\\]', display: true}
-              ],
-              throwOnError : false,
-              output: 'html' // Renderiza puro HTML para mejor compatibilidad y diseño
-            });
-        });
-    </script>
 </body>
 </html>
