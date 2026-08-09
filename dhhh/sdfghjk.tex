@@ -1,0 +1,325 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{geometry}
+\usepackage{siunitx}
+\usepackage{tikz}
+\usepackage{hyperref}
+\geometry{margin=1in}
+
+\newtheorem{exercise}{Ejercicio}
+\newtheorem{solution}{Solución}
+\setlist[exercise]{leftmargin=0pt,labelsep=1em}
+\setlist[solution]{leftmargin=1.5em}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE \textbf{Ejercicios Avanzados de Ecuaciones y Proporciones}}\
+
+\[0.5em]
+  {\large Con soluciones detalladas}
+\end{center}
+
+\bigskip
+
+\section*{Instrucciones}
+\begin{itemize}
+  \item Resuelve cada ejercicio mostrando todos los pasos.
+  \item Para las proporciones, indica si es directa, inversa o compuesta y modela la relación algebraicamente.
+  \item Usa simplificación algebraica y verifica soluciones sustituyendo en la ecuación original.
+\end{itemize}
+
+\section*{Ejercicios}
+
+\begin{exercise}[Ecuaciones lineales y fraccionarias]
+Resuelve las siguientes ecuaciones:
+\begin{enumerate}[label=(\alph*)]
+  \item \(3x - 7 = 2(x+5)\).
+  \item \(\dfrac{2x+1}{x-1} = 3\).
+  \item \(\dfrac{4}{x} + \dfrac{3}{x+2} = 1\).
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[Ecuaciones cuadráticas y con parámetros]
+\begin{enumerate}[label=(\alph*)]
+  \item Resuelve \(x^2 - 5x + 6 = 0\).
+  \item Para qué valores de \(k\) la ecuación \(x^2 + kx + 1 = 0\) tiene raíces reales y distintas.
+  \item Resuelve \(x^2 - (m+1)x + m = 0\) en función de \(m\).
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[Sistemas no lineales]
+Resuelve el sistema
+
+
+\[
+\begin{cases}
+x^2 + y^2 = 25,\
+
+\[4pt]
+x - y = 1.
+\end{cases}
+\]
+
+
+\end{exercise}
+
+\begin{exercise}[Ecuaciones exponenciales y logarítmicas]
+\begin{enumerate}[label=(\alph*)]
+  \item Resuelve \(2^{x+1} = 8\).
+  \item Resuelve \(3^{2x-1} = 27\).
+  \item Resuelve \(\log_2(x+3) - \log_2(x-1) = 2\).
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[Ecuaciones racionales complejas]
+Resuelve
+
+
+\[
+\frac{x^2-4}{x^2-1} = \frac{3x-2}{x+1}.
+\]
+
+
+Indica las restricciones del dominio.
+\end{exercise}
+
+\begin{exercise}[Proporciones directas e inversas]
+\begin{enumerate}[label=(\alph*)]
+  \item Si \(y\) es directamente proporcional a \(x^2\) y \(y(2)=8\), encuentra \(y(5)\).
+  \item Si \(t\) es inversamente proporcional a \(v\) y \(t(4)=3\), encuentra \(t(12)\).
+  \item Problema compuesto: la intensidad \(I\) de una luz varía directamente con la potencia \(P\) e inversamente con el cuadrado de la distancia \(d\). Si \(I=50\) cuando \(P=100\) y \(d=2\), calcula \(I\) cuando \(P=150\) y \(d=3\).
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[Problemas aplicados y modelado]
+\begin{enumerate}[label=(\alph*)]
+  \item Un tanque se llena con dos mangueras: la primera llena en 3 horas y la segunda en 5 horas. ¿Cuánto tardan juntas? Modela y resuelve.
+  \item En una mezcla, la relación masa de A a B debe ser \(3:5\). Si se necesitan 40 kg de mezcla, ¿cuántos kg de A y B?
+  \item Un objeto cae con posición \(s(t)=100-4.9t^2\). Encuentra el tiempo en que la velocidad es \(-19.6\ \mathrm{m/s}\) y verifica la posición.
+\end{enumerate}
+\end{exercise}
+
+\bigskip
+\section*{Soluciones}
+
+\begin{solution}[Ejercicio 1]
+\textbf{(a)} \(3x-7=2(x+5)\Rightarrow 3x-7=2x+10\Rightarrow x=17.\)
+
+\textbf{(b)} \(\dfrac{2x+1}{x-1}=3 \Rightarrow 2x+1=3(x-1)=3x-3 \Rightarrow -x=-4 \Rightarrow x=4.\) Verificar \(x\neq1\).
+
+\textbf{(c)} \(\dfrac{4}{x}+\dfrac{3}{x+2}=1\). Multiplicamos por \(x(x+2)\):
+
+
+\[
+4(x+2)+3x = x(x+2) \Rightarrow 4x+8+3x = x^2+2x
+\]
+
+
+
+
+\[
+7x+8 = x^2+2x \Rightarrow x^2-5x-8=0.
+\]
+
+
+Resolviendo con la fórmula cuadrática:
+
+
+\[
+x=\frac{5\pm\sqrt{25+32}}{2}=\frac{5\pm\sqrt{57}}{2}.
+\]
+
+
+Comprobar que no anulan denominadores.
+\end{solution}
+
+\begin{solution}[Ejercicio 2]
+\textbf{(a)} \(x^2-5x+6=(x-2)(x-3)=0\Rightarrow x=2,3.\)
+
+\textbf{(b)} Discriminante \(\Delta=k^2-4\). Raíces reales y distintas si \(\Delta>0\Rightarrow k^2>4\Rightarrow k>2\) o \(k<-2\).
+
+\textbf{(c)} Usamos fórmula:
+
+
+\[
+x=\frac{m+1\pm\sqrt{(m+1)^2-4m}}{2}=\frac{m+1\pm\sqrt{m^2-2m+1}}{2}=\frac{m+1\pm|m-1|}{2}.
+\]
+
+
+Entonces:
+
+
+\[
+\begin{cases}
+\text{Si } m\ge1: x=\dfrac{m+1\pm(m-1)}{2}\Rightarrow x\in\{m,1\}.\
+
+\[4pt]
+\text{Si } m<1: x=\dfrac{m+1\pm(1-m)}{2}\Rightarrow x\in\{1,m\}.
+\end{cases}
+\]
+
+
+(Se obtiene el mismo conjunto: \(x=1\) y \(x=m\).)
+\end{solution}
+
+\begin{solution}[Ejercicio 3]
+Sustituimos \(x=y+1\) en la primera ecuación o resolvemos por sustitución:
+
+
+\[
+x-y=1\Rightarrow x=y+1.
+\]
+
+
+Sustituir en \(x^2+y^2=25\):
+
+
+\[
+(y+1)^2+y^2=25 \Rightarrow 2y^2+2y+1-25=0 \Rightarrow 2y^2+2y-24=0
+\]
+
+
+
+
+\[
+y^2+y-12=0 \Rightarrow (y+4)(y-3)=0 \Rightarrow y=-4 \text{ o } y=3.
+\]
+
+
+Entonces \(x=y+1\) da \(x=-3\) o \(x=4\). Soluciones: \((-3,-4)\) y \((4,3)\).
+\end{solution}
+
+\begin{solution}[Ejercicio 4]
+\textbf{(a)} \(2^{x+1}=8=2^3\Rightarrow x+1=3\Rightarrow x=2.\)
+
+\textbf{(b)} \(3^{2x-1}=27=3^3\Rightarrow 2x-1=3\Rightarrow x=2.\)
+
+\textbf{(c)} \(\log_2\frac{x+3}{x-1}=2\Rightarrow \frac{x+3}{x-1}=2^2=4\).
+
+
+\[
+x+3=4x-4\Rightarrow -3x=-7\Rightarrow x=\frac{7}{3}.
+\]
+
+
+Verificar dominio: \(x>1\) cumple.
+\end{solution}
+
+\begin{solution}[Ejercicio 5]
+Primero restricciones: \(x\neq\pm1\).
+
+
+
+\[
+\frac{x^2-4}{x^2-1}=\frac{3x-2}{x+1}.
+\]
+
+
+Factorizamos \(x^2-4=(x-2)(x+2)\) y \(x^2-1=(x-1)(x+1)\):
+
+
+\[
+\frac{(x-2)(x+2)}{(x-1)(x+1)}=\frac{3x-2}{x+1}.
+\]
+
+
+Multiplicamos por \((x-1)(x+1)\):
+
+
+\[
+(x-2)(x+2)= (3x-2)(x-1).
+\]
+
+
+Expandimos:
+
+
+\[
+x^2-4 = 3x^2 -3x -2x +2 = 3x^2 -5x +2.
+\]
+
+
+Llevamos todo a un lado:
+
+
+\[
+0 = 2x^2 -5x +6.
+\]
+
+
+Resolvemos:
+
+
+\[
+x = \frac{5\pm\sqrt{25-48}}{4} = \frac{5\pm\sqrt{-23}}{4}.
+\]
+
+
+No hay soluciones reales. Concluimos que no existen soluciones reales; verificar que no se ha perdido ninguna por restricciones.
+\end{solution}
+
+\begin{solution}[Ejercicio 6]
+\textbf{(a)} \(y=kx^2\). Dado \(y(2)=8\Rightarrow 8=k\cdot 4\Rightarrow k=2\). Entonces \(y(5)=2\cdot 25=50.\)
+
+\textbf{(b)} \(t=\dfrac{c}{v}\). Dado \(t(4)=3\Rightarrow 3=\dfrac{c}{4}\Rightarrow c=12\). Entonces \(t(12)=\dfrac{12}{12}=1.\)
+
+\textbf{(c)} \(I = k\frac{P}{d^2}\). Dado \(50 = k\frac{100}{2^2}=k\frac{100}{4}=25k\Rightarrow k=2.\) Para \(P=150,d=3\):
+
+
+\[
+I = 2\cdot\frac{150}{9} = \frac{300}{9} = \frac{100}{3}\approx 33.33.
+\]
+
+
+\end{solution}
+
+\begin{solution}[Ejercicio 7]
+\textbf{(a)} Tasa primera manguera \(= \tfrac{1}{3}\) tanque/h, segunda \(=\tfrac{1}{5}\). Juntas:
+
+
+\[
+\frac{1}{3}+\frac{1}{5}=\frac{5+3}{15}=\frac{8}{15}\ \text{tanques/h}.
+\]
+
+
+Tiempo total \(= \dfrac{1}{8/15}=\dfrac{15}{8}=1.875\ \text{h}=1\ \text{h }52.5\ \text{min}.\)
+
+\textbf{(b)} Relación \(A:B=3:5\). Total partes \(=8\). Para 40 kg:
+
+
+\[
+A=\frac{3}{8}\cdot 40 = 15\ \text{kg},\quad B=\frac{5}{8}\cdot 40 = 25\ \text{kg}.
+\]
+
+
+
+\textbf{(c)} Velocidad \(v(t)=s'(t)=-9.8t\). Queremos \(v=-19.6\):
+
+
+\[
+-9.8t=-19.6\Rightarrow t=2\ \text{s}.
+\]
+
+
+Posición \(s(2)=100-4.9(4)=100-19.6=80.4\ \text{m}.
+\]
+
+
+\end{solution}
+
+\bigskip
+\section*{Consejos para el docente}
+\begin{itemize}
+  \item Añade variaciones numéricas para generar hojas de ejercicios distintas.
+  \item Para evaluación automática, exporta las soluciones a un archivo separado y usa comparadores simbólicos.
+  \item Incluye diagramas con TikZ para problemas geométricos relacionados con proporciones.
+\end{itemize}
+
+\end{document}
+
