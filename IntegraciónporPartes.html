@@ -3,7 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Teoría: Integración por Partes</title>
+<title>Teoría: Integración por Partes (KaTeX)</title>
+
+<!-- ====== Inclusión de KaTeX (Estilos y Scripts) ====== -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
 <style>
   /* ====== CSS: Maquetado y Animaciones ====== */
   body {
@@ -32,23 +38,23 @@
     margin-bottom: 5px;
   }
 
-  /* Estilos para la fórmula */
+  /* Estilos para el contenedor de la fórmula de KaTeX */
   .formula {
-    font-size: 3.5rem;
-    font-family: 'Times New Roman', Times, serif;
+    font-size: 2.2rem;
     margin: 40px 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    flex-wrap: wrap;
+    padding: 10px;
   }
 
+  /* 
+    Se agregó display: inline-block a .term para que las transformaciones 
+    CSS funcionen correctamente dentro de los elementos generados por KaTeX.
+  */
   .term {
-    padding: 5px 15px;
+    padding: 2px 8px;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
+    display: inline-block; 
   }
 
   /* Colores que separan conceptualmente las operaciones */
@@ -78,6 +84,7 @@
     border-left: 4px solid #f1c40f;
     background: #252525;
     border-radius: 0 8px 8px 0;
+    text-align: left;
   }
 
   .arrow {
@@ -93,30 +100,29 @@
   <h2>El Arte de la Integración por Partes</h2>
   <p>Pasa el ratón sobre los términos de la fórmula para ver cómo se conectan.</p>
   
-  <!-- Contenedor principal de la fórmula -->
-  <div class="formula">
-    <span>&int;</span>
-    <span class="term u-part" id="u-left">u</span>
-    <span class="term v-part" id="dv-left">dv</span>
-    <span>=</span>
-    <span class="term u-part" id="u-right">u</span>
-    <span class="term v-part" id="v-right">v</span>
-    <span>-</span>
-    <span>&int;</span>
-    <span class="term v-part" id="v-int">v</span>
-    <span class="term u-part" id="du-right">du</span>
+  <!-- Contenedor principal de la fórmula usando sintaxis KaTeX estilo Obsidian -->
+  <div class="formula" id="math-block">
+    $$ \int \htmlId{u-left}{\htmlClass{term u-part}{u}} \, \htmlId{dv-left}{\htmlClass{term v-part}{dv}} = \htmlId{u-right}{\htmlClass{term u-part}{u}} \htmlId{v-right}{\htmlClass{term v-part}{v}} - \int \htmlId{v-int}{\htmlClass{term v-part}{v}} \, \htmlId{du-right}{\htmlClass{term u-part}{du}} $$
   </div>
 
-  <!-- Texto que cambiará con JavaScript -->
+  <!-- Texto que cambiará con JavaScript (usando KaTeX para las expresiones matemáticas internas) -->
   <div class="explanation" id="text-box">
     Interactúa con la fórmula matemática de arriba para descubrir el flujo de trabajo.
   </div>
 </div>
 
 <script>
-  // ====== JavaScript: Lógica de Interacción ====== //
+  // ====== 1. Renderizar KaTeX PRIMERO (Fórmula principal) ====== //
+  renderMathInElement(document.getElementById("math-block"), {
+    delimiters: [
+        {left: "$$", right: "$$", display: true}
+    ],
+    trust: true, 
+    strict: false
+  });
 
-  // 1. Capturamos los elementos del DOM
+  // ====== 2. JavaScript: Lógica de Interacción ====== //
+  
   const uLeft = document.getElementById('u-left');
   const dvLeft = document.getElementById('dv-left');
   const uRight = document.getElementById('u-right');
@@ -125,17 +131,28 @@
   const duRight = document.getElementById('du-right');
   const textBox = document.getElementById('text-box');
 
-  // 2. Funciones para activar el bucle de las DERIVADAS (Parte Azul)
+  // Funciones para activar el bucle de las DERIVADAS (Parte Azul)
   function highlightU() {
     uLeft.classList.add('active-loop');
     uRight.classList.add('active-loop');
     duRight.classList.add('active-loop');
+    
+    // Texto actualizado con formato KaTeX integrado en el HTML dinámico
     textBox.innerHTML = `
       <strong style="color:#3498db;">PASO 1: DERIVAR</strong><br>
       Elegimos una parte de la función inicial como <span style="color:#3498db">u</span>.<br>
       Esta parte se <span style="color:#3498db">deriva</span> para encontrar <strong>du</strong>.<br>
-      <span class="arrow">↳</span> <em>En tu imagen: u = ln²(x) &rarr; du = (2ln(x)/x) dx</em>
+      <span class="arrow">↳</span> <em>En tu ejemplo:</em> <span class="math-tex">$$u = \\ln^2(x) \\implies du = \\frac{2\\ln(x)}{x} \\, dx$$</span>
     `;
+    // Renderizar KaTeX dentro del cuadro de texto dinámico
+    renderMathInElement(textBox, {
+      delimiters: [
+        {left: "$$", right: "$$", display: false},
+        {left: "$$", right: "$$", display: true}
+      ],
+      trust: true,
+      strict: false
+    });
   }
 
   function removeU() {
@@ -145,17 +162,26 @@
     resetText();
   }
 
-  // 3. Funciones para activar el bucle de las INTEGRALES (Parte Roja)
+  // Funciones para activar el bucle de las INTEGRALES (Parte Roja)
   function highlightV() {
     dvLeft.classList.add('active-loop');
     vRight.classList.add('active-loop');
     vInt.classList.add('active-loop');
+    
     textBox.innerHTML = `
       <strong style="color:#e74c3c;">PASO 2: INTEGRAR</strong><br>
       El resto de la función se agrupa en <span style="color:#e74c3c">dv</span>.<br>
       Esta parte obligatoriamente se debe <span style="color:#e74c3c">integrar</span> para encontrar <strong>v</strong>.<br>
-      <span class="arrow">↳</span> <em>En tu imagen: dv = x dx &rarr; v = x²/2</em>
+      <span class="arrow">↳</span> <em>En tu ejemplo:</em> <span class="math-tex">$$dv = x \\, dx \\implies v = \\frac{x^2}{2}$$</span>
     `;
+    renderMathInElement(textBox, {
+      delimiters: [
+        {left: "$$", right: "$$", display: false},
+        {left: "$$", right: "$$", display: true}
+      ],
+      trust: true,
+      strict: false
+    });
   }
 
   function removeV() {
@@ -169,17 +195,19 @@
     textBox.innerHTML = "Interactúa con la fórmula matemática de arriba para descubrir el flujo de trabajo.";
   }
 
-  // 4. Asignación de Eventos (Hover)
-  // Al tocar cualquier término azul, se ilumina el proceso de derivación
+  // Asignación de Eventos (Hover)
   [uLeft, uRight, duRight].forEach(el => {
-    el.addEventListener('mouseenter', highlightU);
-    el.addEventListener('mouseleave', removeU);
+    if(el) {
+      el.addEventListener('mouseenter', highlightU);
+      el.addEventListener('mouseleave', removeU);
+    }
   });
 
-  // Al tocar cualquier término rojo, se ilumina el proceso de integración
   [dvLeft, vRight, vInt].forEach(el => {
-    el.addEventListener('mouseenter', highlightV);
-    el.addEventListener('mouseleave', removeV);
+    if(el) {
+      el.addEventListener('mouseenter', highlightV);
+      el.addEventListener('mouseleave', removeV);
+    }
   });
 </script>
 
